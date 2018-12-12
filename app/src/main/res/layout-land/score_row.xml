@@ -8,14 +8,13 @@
 
     <TextView
         android:id="@+id/scorenumber"
-        android:layout_width="37dp"
+        android:layout_width="63dp"
         android:layout_height="40dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="TextView"
-        android:textSize="18sp"
         android:textColor="@color/yellow"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/scorename"
         app:layout_constraintHorizontal_bias="0.111"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,14 +22,14 @@
 
     <TextView
         android:id="@+id/scorename"
-        android:layout_width="110dp"
+        android:layout_width="140dp"
         android:layout_height="40dp"
         android:layout_marginStart="7dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="10dp"
         android:text="TextView"
-        android:textSize="18sp"
         android:textColor="@color/yellow"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/scorescore"
         app:layout_constraintStart_toEndOf="@+id/scorenumber"
         app:layout_constraintTop_toTopOf="parent" />
@@ -56,8 +55,8 @@
         android:layout_marginEnd="8dp"
         android:gravity="left"
         android:text="TextView"
-        android:textSize="18sp"
         android:textColor="@color/yellow"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/scoretime"
         app:layout_constraintStart_toEndOf="@+id/scorename"
         app:layout_constraintTop_toTopOf="parent" />

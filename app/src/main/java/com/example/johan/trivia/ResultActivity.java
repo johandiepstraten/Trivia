@@ -1,15 +1,32 @@
 package com.example.johan.trivia;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class ResultActivity extends AppCompatActivity {
+public class ResultActivity extends AppCompatActivity implements PostHelper.CallbackPost {
     int score;
     long time;
+    Context context;
+
+    @Override
+    public void gotHelper(String message) {
+        startActivity(new Intent(ResultActivity.this, HighscoreActivity.class));
+    }
+
+    @Override
+    public void gotHelperError(String message) {
+        Log.d("foutmelding", "" + message);
+        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,8 +45,9 @@ public class ResultActivity extends AppCompatActivity {
     public void Submit(View view) {
         String name = ((EditText)findViewById(R.id.InputName)).getText().toString();
         if(name.length() > 0)   {
-//            Sent score, time and name to highscores
-//            sent user to highscore interface
+            PostHelper helper = new PostHelper(name, score, time, getApplicationContext(), ResultActivity.this);//hier gaat iets fout
+
+            //            Sent score, time and name to highscores
         }
 
     }
