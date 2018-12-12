@@ -18,10 +18,11 @@ public class ResultActivity extends AppCompatActivity {
         int score = values.getInt("score");
         long time = values.getLong("time");
         ((TextView) findViewById(R.id.TotalScore)).setText("Score: " + score);
+        int millis = (int) (time % 1000);
         int seconds = (int) (time / 1000);
         int minutes = seconds / 60;
         seconds = seconds % 60;
-        ((TextView) findViewById(R.id.TotalTime)).setText(String.format("%d:%02d", minutes, seconds));
+        ((TextView) findViewById(R.id.TotalTime)).setText(String.format("Time: %d:%02d:%03d", minutes, seconds, millis));
     }
 
     public void Submit(View view) {

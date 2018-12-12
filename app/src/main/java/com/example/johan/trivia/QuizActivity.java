@@ -42,7 +42,7 @@ public class QuizActivity extends AppCompatActivity {
         answer3.setText(answers.get(2));
         Button answer4 = (Button) findViewById(R.id.Answer4);
         answer4.setText(answers.get(3));
-        long StartTime = System.currentTimeMillis();
+        StartTime = System.currentTimeMillis();
     }
 
     public void CheckAnswer(View view) {

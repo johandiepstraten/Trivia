@@ -29,13 +29,10 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
     }
     @Override
     public void onResponse(JSONObject response) {
-        Log.d("testdit", "onResponse");
         ArrayList<Question> questionlist = new ArrayList<Question>();
 
         try {
             JSONArray questions = response.getJSONArray("results");
-            Log.d("testdit", "resultaat:" + questions);
-
             for (int i = 0; i < questions.length(); i++) {
                 JSONObject current_question = questions.getJSONObject(i);
 
@@ -53,11 +50,8 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
                 questionlist.add(new Question(category, question, correct_answer, wrong_answers));
             }
         } catch (JSONException e) {
-            Log.d("testdit", e + "");
             e.printStackTrace();
         }
-
-        Log.d("testdit questionslist", questionlist+ "");
         activity.gotQuestions(questionlist);
     }
     public interface Callback {
@@ -69,6 +63,5 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://opentdb.com/api.php?amount=50&category=17&difficulty=medium&type=multiple", null, this, this);
         queue.add(jsonObjectRequest);
         this.activity = activity;
-        Log.d("testdit", "getQuestions");
     }
 }

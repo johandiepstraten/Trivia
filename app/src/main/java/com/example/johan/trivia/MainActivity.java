@@ -22,15 +22,12 @@ public class MainActivity extends AppCompatActivity implements QuestionsRequest.
     @Override
     public void gotQuestions(ArrayList<Question> questionlist) {
         questions = questionlist;
-        Log.d("testdit1", questionlist+"");
-
         Toast.makeText(this, "Started", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void gotQuestionsError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
-        Log.d("testdit", "er is een error");
     }
     //    close app if android back button is pressed in this screen
     public void onBackPressed() {
@@ -41,11 +38,13 @@ public class MainActivity extends AppCompatActivity implements QuestionsRequest.
     }
 
     public void Highscores(View view) {
-        Toast.makeText(this, "Highscores", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, HighscoreActivity.class);
+        Log.d("response main", "mijn log doet het");
+//        intent.putExtra("questions", questions);
+        startActivity(intent);
     }
 
     public void Play(View view) {
-        Log.d("test dit", questions+"");
         Intent intent = new Intent(MainActivity.this, QuizActivity.class);
         intent.putExtra("questions", questions);
         startActivity(intent);
