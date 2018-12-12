@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,6 +19,8 @@ public class ResultActivity extends AppCompatActivity implements PostHelper.Call
     @Override
     public void gotHelper(String message) {
         startActivity(new Intent(ResultActivity.this, HighscoreActivity.class));
+        Button disable_button = findViewById(R.id.Submit);
+        disable_button.setEnabled(true);
     }
 
     @Override
@@ -32,8 +35,8 @@ public class ResultActivity extends AppCompatActivity implements PostHelper.Call
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         Bundle values = getIntent().getExtras();
-        int score = values.getInt("score");
-        long time = values.getLong("time");
+        score = values.getInt("score");
+        time = values.getLong("time");
         ((TextView) findViewById(R.id.TotalScore)).setText("Score: " + score);
         int millis = (int) (time % 1000);
         int seconds = (int) (time / 1000);
@@ -46,7 +49,8 @@ public class ResultActivity extends AppCompatActivity implements PostHelper.Call
         String name = ((EditText)findViewById(R.id.InputName)).getText().toString();
         if(name.length() > 0)   {
             PostHelper helper = new PostHelper(name, score, time, getApplicationContext(), ResultActivity.this);//hier gaat iets fout
-
+            Button disable_button = findViewById(R.id.Submit);
+            disable_button.setEnabled(false);
             //            Sent score, time and name to highscores
         }
 

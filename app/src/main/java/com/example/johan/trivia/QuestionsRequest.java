@@ -60,7 +60,7 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
     }
     void getQuestions(Callback activity)   {
         RequestQueue queue = Volley.newRequestQueue(context);
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://opentdb.com/api.php?amount=50&category=17&difficulty=medium&type=multiple", null, this, this);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://opentdb.com/api.php?amount=10&category=17&difficulty=hard&type=multiple", null, this, this);
         queue.add(jsonObjectRequest);
         this.activity = activity;
     }

@@ -1,6 +1,7 @@
 package com.example.johan.trivia;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -28,6 +29,7 @@ public class PostHelper implements Response.ErrorListener, Response.Listener {
         RequestQueue queue = Volley.newRequestQueue(context); // hier gaat iets fout
         PostRequest request = new PostRequest(Request.Method.POST, "https://ide50-johadiep.cs50.io:8080/list", this, this);
         queue.add(request);
+        Log.d("isditiets", "" + name + time + score);
 
 
     }
