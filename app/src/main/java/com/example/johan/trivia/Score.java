@@ -7,6 +7,7 @@ public class Score implements Serializable {
     private int score, ranking;
     private long time;
 
+//    Initiate class for score of everytime someone plays the game
     public Score(String name, int score, long time, int ranking) {
         this.name = name;
         this.score = score;

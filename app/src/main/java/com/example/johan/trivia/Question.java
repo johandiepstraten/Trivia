@@ -7,6 +7,7 @@ public class Question implements Serializable {
     private String category, question, correct_answer;
     private ArrayList<String> answers;
 
+//    Initiate class for questions in the quiz
     public Question(String category, String question, String correct_answer, ArrayList<String> answers) {
         this.category = category;
         this.question = question;
@@ -14,7 +15,7 @@ public class Question implements Serializable {
         this.answers = answers;
     }
 
-    // Initiate getters
+//    Initiate getters
     public String getCategory() {
         return category;
     }
@@ -31,7 +32,7 @@ public class Question implements Serializable {
         return answers;
     }
 
-    // Initiate setters
+//    Initiate setters
     public void setCategory(String category) {
         this.category = category;
     }

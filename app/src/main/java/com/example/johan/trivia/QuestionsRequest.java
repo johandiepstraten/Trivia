@@ -16,10 +16,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+//    get questions from online json file
 public class QuestionsRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
     private Context context;
     Callback activity;
 
+//    forward possible error message
     public QuestionsRequest (Context context)  {
         this.context = context;
     }
@@ -36,13 +38,14 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
             for (int i = 0; i < questions.length(); i++) {
                 JSONObject current_question = questions.getJSONObject(i);
 
+//                extract all needed values from JsonObject and make Question objects for each question
                 String category = current_question.getString("category");
                 String question = current_question.getString("question");
                 String correct_answer = current_question.getString("correct_answer");
-
                 ArrayList<String> wrong_answers = new ArrayList<String>();
-                JSONArray answers = current_question.getJSONArray("incorrect_answers");
 
+//                extract all wrong answers
+                JSONArray answers = current_question.getJSONArray("incorrect_answers");
                 for (int j = 0; j < answers.length(); j++) {
                     String wrong_answer = answers.getString(j);
                     wrong_answers.add(wrong_answer);
@@ -52,12 +55,15 @@ public class QuestionsRequest implements Response.Listener<JSONObject>, Response
         } catch (JSONException e) {
             e.printStackTrace();
         }
+//        send list to callback
         activity.gotQuestions(questionlist);
     }
+//    Send result of request back to MainActivity
     public interface Callback {
         void gotQuestions(ArrayList<Question> questionlist);
         void gotQuestionsError(String message);
     }
+//    get jsonObject from right url
     void getQuestions(Callback activity)   {
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest("https://opentdb.com/api.php?amount=10&category=17&difficulty=hard&type=multiple", null, this, this);

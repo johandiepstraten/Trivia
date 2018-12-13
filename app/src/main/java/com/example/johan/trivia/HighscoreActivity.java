@@ -14,17 +14,20 @@ import java.util.Comparator;
 public class HighscoreActivity extends AppCompatActivity implements HighscoreRequest.Callback {
     ArrayList<Score> scores;
     @Override
+
+//    Request online Json file with scores
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_highscore);
         HighscoreRequest highscores = new HighscoreRequest(this);
         highscores.getHighscores(this);
-        Log.d("gebeurt dit", "check   " + highscores);
     }
 
     @Override
     public void gotHighscore(ArrayList<Score> scorelist) {
         scores = scorelist;
+
+//        sort list from highest to lowest score
         ArrayList<Score> sortedscores = new ArrayList<Score>();
         Collections.sort(scores, new Comparator<Score>() {
             public int compare(Score c1, Score c2) {
@@ -32,6 +35,7 @@ public class HighscoreActivity extends AppCompatActivity implements HighscoreReq
                 if (c1.getScore() < c2.getScore()) return 1;
                 return 0;
             }});
+//        Sort list per socore from fastest to slowest
         for (int i = 10; i>0; i--)    {
             ArrayList<Score> tempscores = new ArrayList<Score>();
             for (int j = 0; j<scores.size(); j++)    {
@@ -49,26 +53,22 @@ public class HighscoreActivity extends AppCompatActivity implements HighscoreReq
                 sortedscores.add(tempscores.get(k));
             }
         }
+//        Set ranking for each score in the list
         for (int l = 0; l<sortedscores.size(); l++) {
             Score rankscore = sortedscores.get(l);
             rankscore.setRanking(l+1);
         }
-
-
-
-
-
+//        Set adapter to view highscores.
         HighscoreAdapter adapter = new HighscoreAdapter(this, R.layout.score_row, sortedscores);
         ListView listView = findViewById(R.id.HighScores);
         listView.setAdapter(adapter);
-        Log.d("gebeurt dit1", "check    " + scores);
-
     }
-
+//      Show possible errors
     @Override
     public void gotHighscoreError(String message) {
-        Toast.makeText(this, "gaat fout", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+//    Send user back to main screen if back button is pressed
     public void onBackPressed() {
         startActivity(new Intent(HighscoreActivity.this, MainActivity.class));
     }

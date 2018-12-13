@@ -15,6 +15,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+//    get scores of all players from online json file
 public class HighscoreRequest implements Response.Listener<JSONArray>, Response.ErrorListener {
 
     private Context context;
@@ -24,16 +25,17 @@ public class HighscoreRequest implements Response.Listener<JSONArray>, Response.
         this.context = context;
     }
     @Override
+
+//    forward possible error message
     public void onErrorResponse(VolleyError error) {
         activity.gotHighscoreError(error.getMessage());
     }
     @Override
     public void onResponse(JSONArray response) {
         ArrayList<Score> scorelist = new ArrayList<Score>();
-        Log.d("response", "" + response);
 
+//        extract all needed values from JsonObject and make Score objects for each player
         try {
-//            JSONArray scores = response.getJSONArray("");
             for (int i = 0; i < response.length(); i++) {
                 JSONObject current_score = response.getJSONObject(i);
                 String name = current_score.getString("Name");
@@ -46,12 +48,15 @@ public class HighscoreRequest implements Response.Listener<JSONArray>, Response.
         } catch (JSONException e) {
             e.printStackTrace();
         }
+//        send list to callback
         activity.gotHighscore(scorelist);
     }
+//    Send result of request back to HighscoreActivity
     public interface Callback {
         void gotHighscore(ArrayList<Score> scorelist);
         void gotHighscoreError(String message);
     }
+//    get jsonarray from right url
     void getHighscores(Callback activity)   {
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest("https://ide50-johadiep.cs50.io:8080/list", this, this);

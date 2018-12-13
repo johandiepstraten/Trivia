@@ -21,24 +21,17 @@ public class HighscoreAdapter extends ArrayAdapter<Score> {
         this.scores = scores;
         this.context = context;
     }
-    //    Set adapter to view certain values of menus of chosen category in listview
+    //    Set adapter to view ranking, name, score and time of each player
     public View getView(int position, View listView, ViewGroup parent) {
         if (listView == null) {
             listView = LayoutInflater.from(getContext()).inflate(R.layout.score_row, parent, false);
         }
-
-        Log.d("gebeurt dit?", scores + "");
-
         Score currentscore = scores.get(position);
         String name = currentscore.getName();
-        Log.d("gebeurt dit2", "" + name);
         int score = currentscore.getScore();
-        Log.d("gebeurt dit4", "" + score);
         long time = currentscore.getTime();
         ((TextView) listView.findViewById(R.id.scorename)).setText(name);
-        Log.d("gebeurt dit5", "" + score);
         ((TextView) listView.findViewById(R.id.scorescore)).setText(String.valueOf(score));
-        Log.d("gebeurt dit3", "" + time);
         int millis = (int) (time % 1000);
         int seconds = (int) (time / 1000);
         int minutes = seconds / 60;
@@ -46,7 +39,6 @@ public class HighscoreAdapter extends ArrayAdapter<Score> {
         ((TextView) listView.findViewById(R.id.scoretime)).setText(String.format("%d:%02d:%03d", minutes, seconds, millis));
         int ranking = currentscore.getRanking();
         ((TextView) listView.findViewById(R.id.scorenumber)).setText(String.valueOf(ranking));
-
 
         return listView;
     }

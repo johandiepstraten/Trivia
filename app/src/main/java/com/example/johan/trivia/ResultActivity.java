@@ -16,20 +16,20 @@ public class ResultActivity extends AppCompatActivity implements PostHelper.Call
     long time;
     Context context;
 
+//    if submit was succesfull send user to HighscoreActivity and enable submit button
     @Override
     public void gotHelper(String message) {
         startActivity(new Intent(ResultActivity.this, HighscoreActivity.class));
         Button disable_button = findViewById(R.id.Submit);
         disable_button.setEnabled(true);
     }
-
+//    show user possible error message
     @Override
     public void gotHelperError(String message) {
-        Log.d("foutmelding", "" + message);
-        Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
     }
-
+//    get score and time and show to user
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,17 +44,17 @@ public class ResultActivity extends AppCompatActivity implements PostHelper.Call
         seconds = seconds % 60;
         ((TextView) findViewById(R.id.TotalTime)).setText(String.format("Time: %d:%02d:%03d", minutes, seconds, millis));
     }
-
+//    get name of user if submit is pressed. send it to the json file and disable submit button
+//    so that user cannot request a submit multiple times while waiting for the request to finish
     public void Submit(View view) {
         String name = ((EditText)findViewById(R.id.InputName)).getText().toString();
         if(name.length() > 0)   {
             PostHelper helper = new PostHelper(name, score, time, getApplicationContext(), ResultActivity.this);//hier gaat iets fout
             Button disable_button = findViewById(R.id.Submit);
             disable_button.setEnabled(false);
-            //            Sent score, time and name to highscores
         }
-
     }
+//     send user to MainActivity if back button is pressed
     public void onBackPressed() {
         startActivity(new Intent(ResultActivity.this, MainActivity.class));
     }
